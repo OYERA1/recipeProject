@@ -11,14 +11,15 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  role      Role     @default(USER)
-  name      String
-  posts     Post[]
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  role       Role     @default(USER)
+  name       String
+  posts      Post[]
+  email      String   @unique
+  password   String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  profilePic String?
 }
 
 enum Role {

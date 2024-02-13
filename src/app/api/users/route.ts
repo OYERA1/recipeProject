@@ -18,7 +18,7 @@ export const POST = async (req: Response) => {
       }
     })
 
-    return Response.json({ message: "OK", user, email })
+    return Response.json({ message: "OK", user, email }, { status: 201 })
   } catch (err) {
     return NextResponse.json({
       message: "Error", err

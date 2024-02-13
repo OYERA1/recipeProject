@@ -1,12 +1,13 @@
 'use client'
 
-import { useModal } from '@/context/useModal'
 import { CookingPot, MagnifyingGlass, User } from '@phosphor-icons/react'
 import Link from 'next/link'
 
-export default function HeaderRecipes() {
-    const { toggleModal } = useModal()
-
+export default function HeaderRecipes({
+    toggleModal
+}: {
+    toggleModal: () => void
+}) {
     return (
         <nav className="flex mt-4 p-4 backdrop-blur-lg bg-gray-900/35 shadow-lg justify-evenly rounded-2xl gap-40 fixed z-10">
             <div>

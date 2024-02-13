@@ -2,15 +2,19 @@
 
 import HeaderRecipes from '@/components/header/page'
 import Trends from '@/components/trends/page'
-import CreateForm from '@/components/forms'
-import { useModal } from '@/context/useModal'
+import Form from '@/components/forms'
+import { useState } from 'react'
 
 export default function Home() {
-    const { isOpenModal, toggleModal } = useModal()
+    const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+
+    const toggleModal = () => {
+        setIsOpenModal(!isOpenModal)
+    }
 
     return (
         <main className="h-[100000px] flex flex-col items-center relative">
-            <HeaderRecipes />
+            <HeaderRecipes toggleModal={toggleModal} />
             <section className="mt-24">
                 <Trends />
             </section>
@@ -21,7 +25,7 @@ export default function Home() {
                         e.target === e.currentTarget && toggleModal()
                     }
                 >
-                    <CreateForm />
+                    <Form toggleModal={toggleModal} />
                 </div>
             )}
         </main>
