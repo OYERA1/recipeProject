@@ -1,16 +1,8 @@
+import { IInput } from 'types/interfaces'
+import { useState } from 'react'
 import { Eye, EyeClosed } from '@phosphor-icons/react'
-import { AppPropsType } from 'next/dist/shared/lib/utils'
-import { ChangeEvent, HTMLInputTypeAttribute, useState } from 'react'
 
-interface IForm {
-    name: string
-    type: string
-    title: string
-    placeholder: string
-    onChange: (newState: ChangeEvent<HTMLInputElement>) => void
-}
-
-export default function Input({ type, name, title, ...props }: IForm) {
+export default function Input({ type, name, title, ...props }: IInput) {
     const [eyeIsOpen, setEyeIsOpen] = useState(false)
 
     const toggleEye = () => {
@@ -18,7 +10,7 @@ export default function Input({ type, name, title, ...props }: IForm) {
     }
 
     return (
-        <div className="flex flex-col w-full gap-2">
+        <div className="flex flex-col w-full gap-1 mt-4">
             <label htmlFor={name} className="capitalize">
                 {title}
             </label>
