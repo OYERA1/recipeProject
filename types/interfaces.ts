@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, ComponentPropsWithoutRef } from "react"
 
 // Functions
 export interface IModal {
@@ -8,15 +8,12 @@ export interface IModal {
 // Forms
 
 export interface IForm extends IModal {
-  type: 'login' | 'register'
+  formType: 'login' | 'register'
 }
 
-export interface IInput {
-  name: string
-  type: string
+export interface IInput extends ComponentPropsWithoutRef<"input"> {
   title: string
-  placeholder: string
-  onChange: (newState: ChangeEvent<HTMLInputElement>) => void;
+  value?: string
 }
 
 export interface IUser {
@@ -24,6 +21,13 @@ export interface IUser {
   email: string
   password: string
   confirmPassword?: string
+}
+
+
+// Buttons 
+
+export interface IButton extends ComponentPropsWithoutRef<'button'> {
+  formType: IForm['formType']
 }
 
 // Error

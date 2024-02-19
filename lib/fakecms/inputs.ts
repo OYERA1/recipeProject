@@ -10,7 +10,7 @@ const inputRegister = [
   {
     type: 'email',
     title: 'email',
-    placeholder: 'insira seu email',
+    placeholder: 'example@email.com',
     name: 'email',
     id: 2
   },
@@ -41,7 +41,7 @@ const inputLogin = [
   {
     type: 'email',
     title: 'email',
-    placeholder: 'insira seu email',
+    placeholder: 'example@email.com',
     name: 'email',
     id: 2
   },
