@@ -14,7 +14,7 @@ export default async function Home() {
     const { name, email } = user
 
     return (
-        <main className="h-[100000px] flex flex-col items-center">
+        <main className="h-[100000px] w-full flex flex-col items-center">
             <HeaderRecipes />
             <section className="mt-24">
                 <Trends />

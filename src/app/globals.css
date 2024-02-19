@@ -9,6 +9,10 @@
     outline: none;
 }
 
+p {
+    min-width: auto;
+}
+
 body {
     flex-wrap: wrap;
 }
