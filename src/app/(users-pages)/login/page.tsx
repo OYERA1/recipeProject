@@ -1,4 +1,5 @@
 import Form from '@/components/Form'
+import Input from '@/components/Input'
 import Link from 'next/link'
 
 export default async function Login() {

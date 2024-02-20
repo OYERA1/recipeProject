@@ -1,49 +1,52 @@
 'use client'
 
-import Link from 'next/link'
-import Input from '@/components/Input'
-import { useForm } from 'react-hook-form'
-import { IForm, IUserLogin, IUserRegister } from 'interfaces'
-import { usePathname } from 'next/navigation'
-import { cms, initialValue } from '@/lib/functions'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { FormSubmitButton } from '@/components/Buttons'
-import { ChangeEvent, SyntheticEvent, useState } from 'react'
+import { IForm, IUser, IUserLogin, IUserRegister } from 'interfaces'
+import { submitLogin, submitRegister } from '@/lib/_actions'
+import { useForm } from 'react-hook-form'
+import { usePathname } from 'next/navigation'
 import { userSchema } from '@/lib/zod-schema'
-import { ZodError } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Input from '@/components/Input'
+import Link from 'next/link'
+import { useState } from 'react'
+import { CtaToLogin, CtaToRegister } from './CtaForm'
 
 export default function Form({ className }: IForm) {
+    const [isLoading, setIsLoading] = useState(false)
+
     // Declarando variaveis
     const router = usePathname().replace('/', '') as 'login' | 'register'
     const schema = userSchema(router)
-    const { cta, inputs } = cms(router)
 
     // Setando estados para formulário
     const {
         handleSubmit,
         register,
+        reset,
         formState: { errors }
-    } = useForm<IUserLogin | IUserRegister>({
+    } = useForm<IUser>({
         mode: 'all',
         reValidateMode: 'onChange',
         resolver: zodResolver(schema)
     })
-    // Funções para onChange e onSubmit
 
-    function handleChange(e: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = e.target
-        // setUserData(prev => ({ ...prev, [name]: value }))
-    }
-
-    function handleForm(data: IUserLogin | IUserRegister) {
-        try {
-            const result = schema.parse(data)
-            console.log({ result })
-        } catch (e) {
-            if (e instanceof ZodError) {
-                console.error(e.flatten())
-            }
-        }
+    async function handleForm(data: IUserLogin | IUserRegister) {
+        // switch (router) {
+        //     case 'login':
+        //         submitLogin(data)
+        //         reset()
+        //         break
+        //     case 'register':
+        //         submitRegister(data)
+        //         reset()
+        //         break
+        // }
+        setIsLoading(true)
+        console.log({ antes: data })
+        await new Promise(resolve => setTimeout(resolve, 5000))
+        setIsLoading(false)
+        console.log({ depois: data })
     }
 
     return (
@@ -51,50 +54,45 @@ export default function Form({ className }: IForm) {
             className={`flex flex-col justify-center items-center h-full relative bg-white rounded-md cursor-auto ${className}`}
             onSubmit={handleSubmit(handleForm)}
         >
-            <h1 className="mt-4 font-bold text-2xl">{cta}</h1>
+            <h1 className="mt-4 font-bold text-2xl">
+                {router === 'login' && 'Faça seu login!'}
+                {router === 'register' && 'Crie sua conta!'}
+            </h1>
             <div>
-                {inputs.map(({ type, id, name, label, placeholder }) => (
+                {router === 'register' && (
                     <Input
-                        // disabled={isLoading}
-                        autoCorrect="off"
-                        error={!!errors}
-                        helperText={errors}
-                        key={id}
-                        label={label}
-                        name={name}
-                        onChange={handleChange}
-                        placeholder={placeholder}
+                        disabled={isLoading}
+                        name="name"
                         register={register}
-                        type={type}
+                        errors={errors.name?.message}
                     />
-                ))}
-                {router === 'login' && (
-                    <div className="flex items-center justify-between gap-4 w-full overflow-hidden">
-                        <Link
-                            className="text-sm underline text my-2"
-                            href={'/register'}
-                        >
-                            Registrar-se!
-                        </Link>
-                    </div>
                 )}
+                <Input
+                    name="email"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors.email?.message}
+                />
+                <Input
+                    name="password"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors.password?.message}
+                />
+                {router === 'register' && (
+                    <Input
+                        disabled={isLoading}
+                        name="confirmPassword"
+                        register={register}
+                        errors={errors.confirmPassword?.message}
+                    />
+                )}
+                {router === 'login' && <CtaToRegister />}
             </div>
 
-            <FormSubmitButton
-                formType={router} // disabled={isLoading}
-            />
+            <FormSubmitButton formType={router} disabled={isLoading} />
 
-            {router === 'register' && (
-                <Link
-                    className="text-sm hover:underline text my-2"
-                    href={'/login'}
-                >
-                    <p>
-                        Já tem uma conta?{' '}
-                        <strong className="text-orange-700">Entrar!</strong>
-                    </p>
-                </Link>
-            )}
+            {router === 'register' && <CtaToLogin />}
         </form>
     )
 }

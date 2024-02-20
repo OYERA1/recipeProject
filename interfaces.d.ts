@@ -1,24 +1,25 @@
-import { ChangeEvent, ComponentPropsWithoutRef } from "react"
 import { z } from "zod"
+import { ChangeEvent, ComponentPropsWithoutRef } from "react"
 import { loginSchema, registerSchema, userSchema } from "./lib/zod-schema"
 import { FieldError, FieldValues, UseFormRegister } from "react-hook-form"
 
+// ZodTypes
+type IUserLogin = z.infer<typeof loginSchema>
+type IUserRegister = z.infer<typeof registerSchema>
+
+export interface IUser extends IUserLogin, IUserRegister { }
 // Forms
 
-export interface IForm extends ComponentPropsWithoutRef<'form'> { }
-
-export interface IInput extends ComponentPropsWithoutRef<"input"> {
-  label: string
-  name: string
-  error: FieldProps<IUser>
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  register: any
-  helperText: FieldProps<IUser>
+export interface IForm extends ComponentPropsWithoutRef<'form'> { 
+  
 }
 
-// ZodTypes
-export type IUserLogin = z.infer<typeof loginSchema>
-export type IUserRegister = z.infer<typeof registerSchema>
+export interface IInput extends ComponentPropsWithoutRef<"input"> {
+  name: 'name' | 'email' | 'password' | 'confirmPassword'
+  errors: string | undefined
+  register: UseFormRegister<IUser>
+}
+
 
 // Buttons 
 

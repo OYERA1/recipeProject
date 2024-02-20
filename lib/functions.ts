@@ -1,26 +1,33 @@
-import inputs from "./fakecms/inputs"
+import { IInput } from "interfaces"
 
-export const initialValue = (type: 'register' | 'login') => {
-  switch (type) {
-    case "register":
+const cms = (name: IInput['name']) => {
+  switch (name) {
+    case 'name':
       return {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: ''
+        label: 'Nome',
+        placeholder: 'John Doe',
+        type: 'text'
       }
-    case "login":
-      return { email: '', name: '', password: '' }
-    default:
-      return { email: '', name: '', password: '' }
+    case 'email':
+      return {
+        label: 'Email',
+        placeholder: 'example@mail.com',
+        type: 'email'
+      }
+    case 'password':
+      return {
+        label: 'Senha',
+        placeholder: '********',
+        type: 'password'
+      }
+    case 'confirmPassword':
+      return {
+        label: 'Confirme sua senha',
+        placeholder: '********',
+        type: 'password'
+      }
+
   }
 }
 
-export const cms = (type: string) => {
-  if (type === 'register') {
-    return { cta: 'Registre-se!', inputs: inputs.inputRegister }
-  }
-  return { cta: 'Faça seu login', inputs: inputs.inputLogin }
-}
-
-
+export { cms }

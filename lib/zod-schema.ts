@@ -4,7 +4,7 @@ import { z } from "zod";
 
 // Schema para o registro
 export const registerSchema = z.object({
-  name: z.string().min(1, { message: 'O nome não pode ter menos que 1 caracter' }).max(45),
+  name: z.string().min(1, { message: 'O nome não pode ter menos que 1 caractere' }).max(45),
   email: z.string().email({ message: 'Insira um email válido' }),
   password: z.string().min(8, { message: 'A senha precisa ter pelo menos 8 caracteres' }),
   confirmPassword: z.string(),
@@ -22,7 +22,6 @@ export const registerSchema = z.object({
 export const loginSchema = z.object({
   email: z.string().email({ message: 'Insira um email válido' }),
   password: z.string().min(8, { message: 'A senha precisa ter pelo menos 8 caracteres' }),
-  confirmPassword: z.string().optional(),
 });
 
 
