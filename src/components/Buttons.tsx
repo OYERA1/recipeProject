@@ -1,4 +1,4 @@
-import { IButton } from 'types/interfaces'
+import { IButton } from 'interfaces'
 
 export function FormSubmitButton({ formType, disabled, ...props }: IButton) {
     return (

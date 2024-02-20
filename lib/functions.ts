@@ -1,4 +1,3 @@
-import { IUser } from "types/interfaces"
 import inputs from "./fakecms/inputs"
 
 export const initialValue = (type: 'register' | 'login') => {
