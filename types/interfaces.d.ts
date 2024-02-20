@@ -1,18 +1,11 @@
 import { ChangeEvent, ComponentPropsWithoutRef } from "react"
 
-// Functions
-export interface IModal {
-  toggleModal: () => void;
-}
-
 // Forms
 
-export interface IForm extends IModal {
-  formType: 'login' | 'register'
-}
+export interface IForm extends ComponentPropsWithoutRef<'form'> { }
 
 export interface IInput extends ComponentPropsWithoutRef<"input"> {
-  title: string
+  label: string
   value?: string
 }
 
@@ -27,7 +20,7 @@ export interface IUser {
 // Buttons 
 
 export interface IButton extends ComponentPropsWithoutRef<'button'> {
-  formType: IForm['formType']
+  formType: string
 }
 
 // Error

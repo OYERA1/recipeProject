@@ -2,9 +2,8 @@ import { IInput } from 'types/interfaces'
 import { useState } from 'react'
 import { Eye, EyeClosed } from '@phosphor-icons/react'
 
-export default function Input({ type, name, title, value, ...props }: IInput) {
+export default function Input({ type, name, label, value, ...props }: IInput) {
     const [eyeIsOpen, setEyeIsOpen] = useState(false)
-
     const toggleEye = () => {
         setEyeIsOpen(!eyeIsOpen)
     }
@@ -12,7 +11,7 @@ export default function Input({ type, name, title, value, ...props }: IInput) {
     return (
         <div className="flex flex-col w-full gap-1 mt-4">
             <label htmlFor={name} className="capitalize disabled:text-gray-400">
-                {title}
+                {label}
             </label>
             <div className="flex border-2 rounded">
                 <input

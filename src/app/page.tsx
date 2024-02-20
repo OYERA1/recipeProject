@@ -1,4 +1,4 @@
-import HeaderRecipes from '@/components/header'
+import HeaderRecipes from '@/components/Header'
 import Trends from '@/components/trends/page'
 import { getCurentUser } from '@/lib/session'
 
@@ -18,7 +18,6 @@ export default async function Home() {
             <HeaderRecipes />
             <section className="mt-24">
                 <Trends />
-
                 <p>{`${name} ${email}`}</p>
             </section>
         </main>

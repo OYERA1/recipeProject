@@ -4,9 +4,9 @@ import {
     User
 } from '@phosphor-icons/react/dist/ssr'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
 export default async function HeaderRecipes() {
-    
     return (
         <nav className="flex gap-24 w-max mt-4 p-4 backdrop-blur-lg bg-gray-600/35 shadow-lg rounded-2xl fixed">
             <Link href={'/'}>
@@ -27,13 +27,13 @@ export default async function HeaderRecipes() {
                 </button>
             </div>
 
-            <button
-                type="button"
+            <Link
+                href={'/login'}
                 className="flex items-center justify-center hover:underline decoration-orange-700 underline-offset-2"
             >
                 <User size={18} />
-                <p className="">login</p>
-            </button>
+                <p>login</p>
+            </Link>
         </nav>
     )
 }
